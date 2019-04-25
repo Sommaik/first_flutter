@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:first/detail_screen.dart';
+import 'post_list_screen.dart';
 
 class TabBarDemo extends StatelessWidget {
   @override
@@ -19,7 +20,7 @@ class TabBarDemo extends StatelessWidget {
         ),
         body: TabBarView(
           children: <Widget>[
-            Text("Car"),
+            PostListScreen(),
             Icon(Icons.accessible_forward),
             RaisedButton(
               child: Text("Boat"),

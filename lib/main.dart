@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 // import './tab_bar_demo.dart';
 import 'package:first/tab_bar_demo.dart';
 import 'package:first/login_screen.dart';
+import 'package:first/profile_screen.dart';
+import 'my_home.dart';
 
 void main() => runApp(MyApp());
 
@@ -14,56 +16,13 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      initialRoute: '/login',
+      initialRoute: '/',
       routes: {
         '/': (context) => MyHome(),
         '/tabs': (context) => TabBarDemo(),
         '/login': (context) => LoginScreen(),
+        '/profile': (context) => ProfileScreen()
       },
-    );
-  }
-}
-
-class MyHome extends StatefulWidget {
-  @override
-  State<StatefulWidget> createState() {
-    return MyHomePage();
-  }
-}
-
-class MyHomePage extends State {
-  int counter = 0;
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("First App"),
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.tab),
-            onPressed: () {
-              Navigator.pushNamed(context, '/tabs');
-            },
-          )
-        ],
-      ),
-      body: Center(
-        child: Column(
-          children: <Widget>[
-            Text("Hello This is counter"),
-            Text("$counter"),
-          ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.add_circle),
-        onPressed: () {
-          setState(() {
-            counter++;
-          });
-          print(counter);
-        },
-      ),
     );
   }
 }
