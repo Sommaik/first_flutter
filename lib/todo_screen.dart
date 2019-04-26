@@ -34,7 +34,10 @@ class TodoScreenState extends State<TodoScreen> {
             )
           : FloatingActionButton(
               child: Icon(Icons.delete),
-              onPressed: () {},
+              onPressed: () {
+                _provider.deleteCompleted();
+                setState(() {});
+              },
             ),
       bottomNavigationBar: BottomNavigationBar(
         onTap: (int tab) {
@@ -71,7 +74,12 @@ class TodoScreenState extends State<TodoScreen> {
                       title: Text(data[index].title),
                       trailing: Checkbox(
                         value: data[index].done,
-                        onChanged: (bool value) {},
+                        onChanged: (bool value) {
+                          Todo todo = data[index];
+                          todo.done = value;
+                          _provider.update(todo);
+                          setState(() {});
+                        },
                       ),
                     );
                   },

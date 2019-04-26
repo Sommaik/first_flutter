@@ -97,7 +97,7 @@ class TodoProvider {
     }).toList();
   }
 
-  Future<int> deletCompleted() async {
+  Future<int> deleteCompleted() async {
     return await db.delete(
       tableTodo,
       where: '$columnDone = ?',

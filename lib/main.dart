@@ -5,6 +5,7 @@ import 'package:first/login_screen.dart';
 import 'package:first/profile_screen.dart';
 import 'my_home.dart';
 import 'package:first/todo_form.dart';
+import 'register_screen.dart';
 
 void main() => runApp(MyApp());
 
@@ -17,13 +18,14 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      initialRoute: '/',
+      initialRoute: '/login',
       routes: {
         '/': (context) => MyHome(),
         '/tabs': (context) => TabBarDemo(),
         '/login': (context) => LoginScreen(),
         '/profile': (context) => ProfileScreen(),
         '/newTask': (context) => TodoForm(),
+        '/register': (context) => RegisterScreen(),
       },
     );
   }

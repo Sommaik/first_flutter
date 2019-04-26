@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -46,16 +47,33 @@ class LoginState extends State<LoginScreen> {
                 onPressed: () {
                   if (_formKey.currentState.validate()) {
                     // pass
-                    print(emailController.text);
-                    print(passwordController.text);
+                    FirebaseAuth auth = FirebaseAuth.instance;
+                    auth
+                        .signInWithEmailAndPassword(
+                      email: emailController.text,
+                      password: passwordController.text,
+                    )
+                        .then((FirebaseUser user) {
+                      if (user.isEmailVerified) {
+                        // goto main
+                      } else {
+                        Scaffold.of(context).showSnackBar(SnackBar(
+                          content: Text("Please verified your email"),
+                        ));
+                      }
+                    });
                   } else {
-                    // not pass
+                    Scaffold.of(context).showSnackBar(SnackBar(
+                      content: Text("Please fill in all field "),
+                    ));
                   }
                 },
               ),
               FlatButton(
                 child: Text("Register new account"),
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.pushNamed(context, "/register");
+                },
               )
             ],
           ),
