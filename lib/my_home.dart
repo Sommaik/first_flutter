@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
 import 'dart:io' show File;
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class MyHome extends StatefulWidget {
   @override
@@ -49,6 +50,7 @@ class MyHomePage extends State {
           children: <Widget>[
             Text("Hello This is counter"),
             Text("$counter"),
+            buildUserInfo(),
           ],
         ),
       ),
@@ -88,5 +90,19 @@ class MyHomePage extends State {
     } catch (e) {
       return 0;
     }
+  }
+
+  Widget buildUserInfo() {
+    return StreamBuilder(
+      stream: FirebaseAuth.instance.currentUser().asStream(),
+      builder: (BuildContext context, AsyncSnapshot<FirebaseUser> snapshot) {
+        if (snapshot.hasData) {
+          FirebaseUser user = snapshot.data;
+          return Text(user.email);
+        } else {
+          return Text("Loading...");
+        }
+      },
+    );
   }
 }

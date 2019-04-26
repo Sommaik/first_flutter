@@ -56,14 +56,21 @@ class LoginState extends State<LoginScreen> {
                         .then((FirebaseUser user) {
                       if (user.isEmailVerified) {
                         // goto main
+                        Navigator.pushReplacementNamed(context, "/home");
                       } else {
-                        Scaffold.of(context).showSnackBar(SnackBar(
+                        Scaffold.of(_formKey.currentContext)
+                            .showSnackBar(SnackBar(
                           content: Text("Please verified your email"),
                         ));
                       }
+                    }).catchError((error) {
+                      Scaffold.of(_formKey.currentContext)
+                          .showSnackBar(SnackBar(
+                        content: Text(error.toString()),
+                      ));
                     });
                   } else {
-                    Scaffold.of(context).showSnackBar(SnackBar(
+                    Scaffold.of(_formKey.currentContext).showSnackBar(SnackBar(
                       content: Text("Please fill in all field "),
                     ));
                   }
