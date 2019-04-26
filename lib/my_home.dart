@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
 import 'dart:io' show File;
+import 'package:shared_preferences/shared_preferences.dart';
 
 class MyHome extends StatefulWidget {
   @override
@@ -11,12 +12,20 @@ class MyHome extends StatefulWidget {
 
 class MyHomePage extends State {
   int counter = 0;
+  SharedPreferences _perf;
+
   @override
   void initState() {
     super.initState();
-    readCounter().then((int value) {
+    // readCounter().then((int value) {
+    //   setState(() {
+    //     counter = value;
+    //   });
+    // });
+    SharedPreferences.getInstance().then((perf) {
       setState(() {
-        counter = value;
+        _perf = perf;
+        counter = perf.getInt("counter") ?? 0;
       });
     });
   }
@@ -49,7 +58,8 @@ class MyHomePage extends State {
           setState(() {
             counter++;
           });
-          writeCounter(counter);
+          // writeCounter(counter);
+          _perf.setInt("counter", counter);
         },
       ),
     );

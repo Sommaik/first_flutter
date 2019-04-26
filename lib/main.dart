@@ -4,6 +4,7 @@ import 'package:first/tab_bar_demo.dart';
 import 'package:first/login_screen.dart';
 import 'package:first/profile_screen.dart';
 import 'my_home.dart';
+import 'package:first/todo_form.dart';
 
 void main() => runApp(MyApp());
 
@@ -21,7 +22,8 @@ class MyApp extends StatelessWidget {
         '/': (context) => MyHome(),
         '/tabs': (context) => TabBarDemo(),
         '/login': (context) => LoginScreen(),
-        '/profile': (context) => ProfileScreen()
+        '/profile': (context) => ProfileScreen(),
+        '/newTask': (context) => TodoForm(),
       },
     );
   }
