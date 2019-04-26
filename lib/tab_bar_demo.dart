@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:first/detail_screen.dart';
 import 'post_list_screen.dart';
 import 'todo_screen.dart';
+import 'book_list_screen.dart';
 
 class TabBarDemo extends StatelessWidget {
   @override
@@ -23,19 +23,7 @@ class TabBarDemo extends StatelessWidget {
           children: <Widget>[
             PostListScreen(),
             TodoScreen(),
-            RaisedButton(
-              child: Text("Boat"),
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => DetailScreen(
-                          title: 'Test from tab',
-                        ),
-                  ),
-                );
-              },
-            )
+            BookListScreen(),
           ],
         ),
       ),

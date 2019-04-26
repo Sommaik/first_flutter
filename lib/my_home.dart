@@ -3,6 +3,9 @@ import 'package:path_provider/path_provider.dart';
 import 'dart:io' show File;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'blocs/counter_bloc.dart';
+import 'blocs/counter_event.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class MyHome extends StatefulWidget {
   @override
@@ -33,6 +36,8 @@ class MyHomePage extends State {
 
   @override
   Widget build(BuildContext context) {
+    CounterBloc _bloc = BlocProvider.of<CounterBloc>(context);
+
     return Scaffold(
       appBar: AppBar(
         title: Text("First App"),
@@ -42,6 +47,12 @@ class MyHomePage extends State {
             onPressed: () {
               Navigator.pushNamed(context, '/tabs');
             },
+          ),
+          IconButton(
+            icon: Icon(Icons.map),
+            onPressed: () {
+              Navigator.pushNamed(context, '/map');
+            },
           )
         ],
       ),
@@ -49,7 +60,7 @@ class MyHomePage extends State {
         child: Column(
           children: <Widget>[
             Text("Hello This is counter"),
-            Text("$counter"),
+            buildCounter(_bloc),
             buildUserInfo(),
           ],
         ),
@@ -57,11 +68,12 @@ class MyHomePage extends State {
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add_circle),
         onPressed: () {
-          setState(() {
-            counter++;
-          });
-          // writeCounter(counter);
-          _perf.setInt("counter", counter);
+          // setState(() {
+          //   counter++;
+          // });
+          // // writeCounter(counter);
+          // _perf.setInt("counter", counter);
+          _bloc.dispatch(CounterEvent.increment);
         },
       ),
     );
@@ -102,6 +114,15 @@ class MyHomePage extends State {
         } else {
           return Text("Loading...");
         }
+      },
+    );
+  }
+
+  Widget buildCounter(CounterBloc _bloc) {
+    return BlocBuilder(
+      bloc: _bloc,
+      builder: (BuildContext context, int value) {
+        return Text("$value");
       },
     );
   }

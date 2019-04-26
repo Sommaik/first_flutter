@@ -7,6 +7,7 @@ import 'my_home.dart';
 import 'package:first/todo_form.dart';
 import 'register_screen.dart';
 import 'landing_screen.dart';
+import 'map_screen.dart';
 
 void main() => runApp(MyApp());
 
@@ -28,6 +29,7 @@ class MyApp extends StatelessWidget {
         '/newTask': (context) => TodoForm(),
         '/register': (context) => RegisterScreen(),
         '/home': (context) => MyHome(),
+        '/map': (context) => MapScreen(),
       },
     );
   }

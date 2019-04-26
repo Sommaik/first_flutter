@@ -32,6 +32,9 @@ dependencies:
   sqflite: ^1.1.5
   firebase_auth: ^0.8.4+5
   cloud_firestore: ^0.9.13+1
+  google_maps_flutter: ^0.5.7
+  flutter_bloc: ^0.11.0
+  meta: ^1.1.6
 
 dev_dependencies:
   flutter_test:
